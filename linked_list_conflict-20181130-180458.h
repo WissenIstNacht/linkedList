@@ -22,7 +22,7 @@ typedef struct{
  *          
  *          
  * @return  1 if the insertion was successful,
- *          -1 if not (e.g. no more mem, etc,)
+ *          -1 if not (e.g. element already in tree, no more mem, etc,)
  * 
  * In an empty list the other insertion functions would lead to a segmentation fault.
  * This is why this function is called whenever an insertion is made into a list with size 0.
@@ -38,7 +38,7 @@ int initializeList(int key, pList xs);
  *          
  *          
  * @return  1 if the insertion was successful,
- *          -1 if not (e.g. no more mem, etc,)
+ *          -1 if not (e.g. element already in tree, no more mem, etc,)
  * 
  * Thanks to the pointer to the last element provided by the list itself, this method
  * can access the end of the list directly and add the item in time O(1).
@@ -52,21 +52,18 @@ int insertEnd(int key, pList xs);
  *          
  *          
  * @return  1 if the insertion was successful,
- *          -1 if not (e.g. no more mem, etc,)
+ *          -1 if not (e.g. element already in tree, no more mem, etc,)
  */
-int insertFront(int key, pList xs);
+int insertFront(int q, pList xs);
 
 /** Searches for an item in a list.
  * 
- * @param   key: value that's searched.
- *          pList: pointer to list in which the key should be searched. 
+ * @param   key: key th.
+ *          pList: pointer to list into which key should be inserted. 
  *          
- * @return  i >= 0, position where key was found 
- *          -1 if key was not found.
- * 
- * This method searches the list item by item. Hence it takes linear time.
- * In case a key is in the list multiple times it output the position  where
- * it encounters the key first.
+ *          
+ * @return  1 if the insertion was successful,
+ *          -1 if not (e.g. element already in tree, no more mem, etc,)
  */
 int search(int key, pList xs);
 

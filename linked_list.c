@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "linked_list.h"
 
+
 int initializeList(int key, pList xs){
     xs->size = 1;
     
