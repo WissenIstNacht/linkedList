@@ -2,30 +2,52 @@
 #include <stdlib.h>
 #include "linked_list.h"
 
-int insertLast(int value, pList xs){
-    //create new element
-    elem new;
-    new.key = value;
-    new.nextElem = NULL; 
+int initializeList(int key, pList xs){
+    xs->size = 1;
+    
+    pElem firstElems = malloc(sizeof(elem));
 
-    //allocate space for it
-    pElem newLast = malloc(sizeof(elem));
-
-    if(newLast != NULL){
-        //update previous last element to point to new last element
-       pElem currLast = xs->lastElem;
-       currLast->nextElem = newLast;
-        //update list's 'last' pointer to hold new element
-       xs->lastElem = newLast;
-       xs->size++;
-       return 0;
-    }else{
+    
+    if(firstElems == NULL){
         printf("Not enough memory!");
         return -1;
     }
+    
+    printf("hi\n");
+    firstElems->key = key;
+    firstElems->nextElem = NULL;
+    xs->firstElem = firstElems;
+    xs->lastElem = firstElems;
+    return 0;
 }
 
-int insertFirst(int value, pList xs){
+int insertEnd(int value, pList xs){
+    //inserting into an empty list is done via initializeList.
+    if(xs->size == 0){
+        return initializeList(value, xs);
+    }
+
+    //allocate space for new element
+    pElem newLast = malloc(sizeof(elem));
+
+    if(newLast == NULL){
+        printf("Not enough memory!");
+        return -1;
+    }
+
+    //instantiate new element
+    newLast->key = value;
+    newLast->nextElem = NULL;
+
+    //update pointers
+    pElem currLast = xs->lastElem;
+    currLast->nextElem = newLast;
+    xs->lastElem = newLast;
+    xs->size++;
+    return 0;
+}
+
+int insertFront(int value, pList xs){
     //Create new elemnt
     elem new;
     new.key = value;
@@ -33,14 +55,16 @@ int insertFirst(int value, pList xs){
 
     pElem newFirst = malloc(sizeof(elem));
 
-    if(newFirst != NULL){
-        //update lists first element
-        xs->firstElem = newFirst;
-        xs->size++;
-    }else{
+    if(newFirst == NULL){
         printf("Not enough memory!");
         return -1;
     }
+    
+    //update lists first element
+    newFirst->key = value;
+    newFirst->nextElem = xs->firstElem;
+    xs->firstElem = newFirst;
+    xs->size++;
 }
 
 int search(int value, pList xs){

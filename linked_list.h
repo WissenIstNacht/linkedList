@@ -15,9 +15,11 @@ typedef struct{
     int size;
 } list, *pList;
 
-int insertLast(int key, pList xs);
+int initializeList(int key, pList xs);
 
-int insertFirst(int key, pList xs);
+int insertEnd(int key, pList xs);
+
+int insertFront(int key, pList xs);
 
 int search(int key, pList xs);
 
