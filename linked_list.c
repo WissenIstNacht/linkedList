@@ -85,7 +85,39 @@ int search(int value, pList xs){
     return 0;
 }
 
-int removeElem(int key, pList xs){
+int removeElem(int pos, pList xs){
+    int n = xs->size;
+
+    //check calidity of position (incl. that list be non empty)
+    if(pos < 0 || pos >= n){
+        printf("Position out of bounds or list empty!");
+            return -1;
+    }
+
+    //Different procedure depending on list size.
+    if(n==1){
+        //for one item first=last. List empty afterwards.
+        pElem firstItem = xs->firstElem;
+        xs->firstElem = NULL;
+        xs->lastElem = NULL;
+        free(firstItem);
+    }if(n==2){
+        //for two element only redirect lists first and last porinter.
+        if(pos == 0){
+            pElem firstItem = xs->firstElem;
+            xs->firstElem = xs->lastElem;
+            free(firstItem);
+        }else{
+            pElem lastItem = xs->lastElem;
+            xs->lastElem = xs->firstElem;
+            xs->firstElem->nextElem = NULL;
+            free(lastItem);
+        }
+    }else{
+
+    }
+    
+    xs->size--;
     return 0;
 }
 

@@ -70,7 +70,7 @@ int insertFront(int key, pList xs);
  */
 int search(int key, pList xs);
 
-int removeElem(int key, pList xs);
+int removeElem(int pos, pList xs);
 
 int print(pList xs);
 
