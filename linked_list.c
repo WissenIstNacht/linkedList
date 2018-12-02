@@ -4,10 +4,9 @@
 
 
 int initializeList(int key, pList xs){
-    xs->size = 1;
+    xs->size = 1;    
     
     pElem firstElems = malloc(sizeof(elem));
-
     
     if(firstElems == NULL){
         printf("Not enough memory!");
@@ -69,7 +68,6 @@ int insertFront(int value, pList xs){
 }
 
 int search(int value, pList xs){
-
     pElem currElem = xs->firstElem;
     
     //go through list
@@ -81,7 +79,7 @@ int search(int value, pList xs){
         //update pointer
         currElem = currElem->nextElem;
     }
-    //this code is only reached if whole list was searched.
+    
     return 0;
 }
 
