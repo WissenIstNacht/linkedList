@@ -70,8 +70,31 @@ int insertFront(int key, pList xs);
  */
 int search(int key, pList xs);
 
+/** Removes an item form the list.
+ * 
+ * @param   pos: Position in [0,size-1] of element to be deleted.
+ *          pList: pointer to list in which the key should be deleted. 
+ *          
+ * @return   0, if element deleted successfully. 
+ *          -1, else (out of bound, etc.).
+ * 
+ * This method goes to the element in i-th position starting at firstElem whihc
+ * has position 0. Redirects necessary pointers and frees memory of item that's
+ * removed.
+ */
 int removeElem(int pos, pList xs);
 
+/** Prints the list
+ * 
+ * @param   pList: pointer to list in which the key should be deleted. 
+ *          
+ * @return   0
+ * 
+ * This method goes to the list and prints each element to the console one by one.
+ * The output for a list fo n elements looks as follows:
+ * 
+ *  [e_1, e_2, ..., e_n]
+ */
 int print(pList xs);
 
 int sort(pList xs);

@@ -88,21 +88,22 @@ int search(int value, pList xs){
 int removeElem(int pos, pList xs){
     int n = xs->size;
 
-    //check calidity of position (incl. that list be non empty)
+    //check validity of position (incl. that list be non empty)
     if(pos < 0 || pos >= n){
         printf("Position out of bounds or list empty!");
-            return -1;
+        return -1;
     }
 
-    //Different procedure depending on list size.
+    // Different procedure depending on list size.
     if(n==1){
         //for one item first=last. List empty afterwards.
         pElem firstItem = xs->firstElem;
         xs->firstElem = NULL;
         xs->lastElem = NULL;
         free(firstItem);
-    }if(n==2){
-        //for two element only redirect lists first and last porinter.
+    }
+    //for two elements only simply redirect lists first/last pointer
+    else if(n==2){
         if(pos == 0){
             pElem firstItem = xs->firstElem;
             xs->firstElem = xs->lastElem;
@@ -113,8 +114,36 @@ int removeElem(int pos, pList xs){
             xs->firstElem->nextElem = NULL;
             free(lastItem);
         }
-    }else{
+    }
+    //if list larger need to traverse to element...
+    else{
+        pElem lItem = xs->firstElem;    //needed for traversing
+        pElem mItem = lItem->nextElem;
+        int k = 1;
 
+        //...except for first elemnt
+        if(pos == 0){
+            lItem = xs->firstElem;
+            xs->firstElem = lItem->nextElem;
+            free(lItem);
+        }else{
+        
+        //travese        
+        while(k < pos)
+            lItem = mItem;
+            mItem = mItem->nextElem;
+            k++;
+        }
+
+        //elements in middle of the list deleted differently than at end.
+        if(pos == n-1){
+            xs->lastElem = lItem;
+            lItem->nextElem = NULL;
+            free(mItem);
+        }else{
+            lItem->nextElem = mItem->nextElem;
+            free(mItem);
+        }
     }
     
     xs->size--;
@@ -128,7 +157,6 @@ int sort(pList xs){
 int print(pList xs){
 
     if(xs->firstElem != NULL){
-
         pElem currElem = xs->firstElem;
 
         printf("[%i", currElem->key);
