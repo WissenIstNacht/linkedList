@@ -13,7 +13,6 @@ int initializeList(int key, pList xs){
         return -1;
     }
     
-    printf("hi\n");
     firstElems->key = key;
     firstElems->nextElem = NULL;
     xs->firstElem = firstElems;
@@ -44,6 +43,7 @@ int insertEnd(int value, pList xs){
     currLast->nextElem = newLast;
     xs->lastElem = newLast;
     xs->size++;
+    
     return 0;
 }
 
@@ -69,21 +69,22 @@ int insertFront(int value, pList xs){
 
 int search(int value, pList xs){
     pElem currElem = xs->firstElem;
-    
+    int k = 0;
     //go through list
     while(currElem->nextElem != NULL){
         //if elem found, stop.
         if(currElem->key == value){
-            return 1;
+            return k;
         }
         //update pointer
         currElem = currElem->nextElem;
+        k++;
     }
     
     return 0;
 }
 
-int removeElem(int pos, pList xs){
+int removeElement(int pos, pList xs){
     int n = xs->size;
 
     //check validity of position (incl. that list be non empty)
@@ -162,6 +163,6 @@ int print(pList xs){
            currElem = currElem->nextElem;
            printf(", %i", currElem->key);
         }
-        printf("]");
+        printf("]\n");
     }
 }

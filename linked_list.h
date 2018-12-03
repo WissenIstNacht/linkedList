@@ -1,7 +1,8 @@
+
+
+
 #ifndef _LL_H_
-
 #define _LL_H_
-
 
 typedef struct elem elem, *pElem;
 typedef struct elem{
@@ -82,7 +83,7 @@ int search(int key, pList xs);
  * has position 0. Redirects necessary pointers and frees memory of item that's
  * removed.
  */
-int removeElem(int pos, pList xs);
+int removeElement(int pos, pList xs);
 
 /** Prints the list
  * 
