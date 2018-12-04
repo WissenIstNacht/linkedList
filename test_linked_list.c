@@ -11,7 +11,7 @@ int main(int argc, char const *argv[])
     initializeList(3, &testList);
     insertEnd(4, &testList);
     insertFront(2, &testList);
-    print(&testList);
+    // print(&testList);
     
     //longer lists
     list listAscend;
@@ -26,7 +26,7 @@ int main(int argc, char const *argv[])
         }
     }
     // print(&listAscend);
-    // print(&listDescend);
+    print(&listDescend);
 
     //testing search method
     for(int i = 0; i < 20; i++){
@@ -54,6 +54,11 @@ int main(int argc, char const *argv[])
     //removing all values 1 by 1
     while(removeElement(0, &listAscend) > -1){
         print(&listAscend);
+    }
+
+    printf("The value is %i\n", listDescend.size);
+    while(removeElement(listDescend.size-1, &listDescend) > -1){
+        print(&listDescend);
     }
 
     return 0;

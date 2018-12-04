@@ -5,7 +5,7 @@
 #define _LL_H_
 
 typedef struct elem elem, *pElem;
-typedef struct elem{
+struct elem{
     int key;
     pElem nextElem;
 };

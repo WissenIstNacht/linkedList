@@ -89,7 +89,7 @@ int removeElement(int pos, pList xs){
 
     //check validity of position (incl. that list be non empty)
     if(pos < 0 || pos >= n){
-        printf("Position out of bounds or list empty!");
+        printf("Position out of bounds or list empty!\n");
         return -1;
     }
 
@@ -119,32 +119,28 @@ int removeElement(int pos, pList xs){
         pElem lItem = xs->firstElem;    //needed for traversing
         pElem mItem = lItem->nextElem;
         int k = 1;
-
         //...except for first elemnt
         if(pos == 0){
-            lItem = xs->firstElem;
-            xs->firstElem = lItem->nextElem;
+            xs->firstElem = mItem;
             free(lItem);
         }else{
-        
-        //travese        
-        while(k < pos)
-            lItem = mItem;
-            mItem = mItem->nextElem;
-            k++;
-        }
-
-        //elements in middle of the list deleted differently than at end.
-        if(pos == n-1){
-            xs->lastElem = lItem;
-            lItem->nextElem = NULL;
-            free(mItem);
-        }else{
-            lItem->nextElem = mItem->nextElem;
-            free(mItem);
+            //travese        
+            while(k < pos){
+                lItem = mItem;
+                mItem = mItem->nextElem;
+                k++;
+            }
+            //elements in middle of the list deleted differently than at end.
+            if(pos == n-1){
+                xs->lastElem = lItem;
+                lItem->nextElem = NULL;
+                free(mItem);
+            }else{
+                lItem->nextElem = mItem->nextElem;
+                free(mItem);
+            }
         }
     }
-    
     xs->size--;
     return 0;
 }
@@ -154,6 +150,9 @@ int sort(pList xs){
 }
 
 int print(pList xs){
+    if(xs->size == 0){
+        printf("[]\n");
+    }
 
     if(xs->firstElem != NULL){
         pElem currElem = xs->firstElem;
