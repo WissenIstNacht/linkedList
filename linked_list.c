@@ -2,21 +2,34 @@
 #include <stdlib.h>
 #include "linked_list.h"
 
+list createList(){
+    list xs;
 
-int initializeList(int key, pList xs){
-    xs->size = 1;    
+    xs.firstElem = NULL;
+    xs.lastElem = NULL;
+    xs.size = 0;
+
+    return xs;
+}
+
+static int initializeList(int key, pList xs){
+    //allocatae new node
+    pElem firstItem = malloc(sizeof(elem));
     
-    pElem firstElems = malloc(sizeof(elem));
-    
-    if(firstElems == NULL){
+    if(firstItem == NULL){
         printf("Not enough memory!");
         return -1;
     }
     
-    firstElems->key = key;
-    firstElems->nextElem = NULL;
-    xs->firstElem = firstElems;
-    xs->lastElem = firstElems;
+    //initialize new node
+    firstItem->key = key;
+    firstItem->nextElem = NULL;
+
+    //update listpointers
+    xs->firstElem = firstItem;
+    xs->lastElem = firstItem;
+    xs->size++;
+
     return 0;
 }
 
@@ -48,6 +61,11 @@ int insertEnd(int value, pList xs){
 }
 
 int insertFront(int value, pList xs){
+    //inserting into an empty list is done via initializeList.
+    if(xs->size == 0){
+        return initializeList(value, xs);
+    }
+
     //Create new elemnt
     elem new;
     new.key = value;
@@ -65,6 +83,8 @@ int insertFront(int value, pList xs){
     newFirst->nextElem = xs->firstElem;
     xs->firstElem = newFirst;
     xs->size++;
+
+    return 0;
 }
 
 int search(int value, pList xs){
