@@ -1,5 +1,5 @@
 /*
-    Author: WissenIst Nacht
+    Author: WissenIstNacht
     Date: Novemeber 2018 
 
     This program tests the different functions provided by the module
@@ -15,7 +15,7 @@
 
 int main(int argc, char const *argv[])
 {
-    /* basic insertion test */
+   /* TEST INSERTIONS */
     list testList  = createList();
     insertFront(3, &testList);
     insertEnd(4, &testList);
@@ -25,15 +25,28 @@ int main(int argc, char const *argv[])
     /* longer lists */
     list listAscend = createList();
     list listDescend = createList();
+    
     for(int i = 0; i < 10; i++){
         insertEnd(i, &listAscend);
         insertFront(i, &listDescend);
     }
-
     // print(&listAscend);
     // print(&listDescend);
 
-    /* testing search method */
+    /* list containing value several times. */
+    list cList = createList();
+    for(int i = 0; i < 10; i++){
+        
+        if(i < 5){
+            insertEnd(4, &cList);
+        }else{
+            insertEnd(2, &cList);
+        }
+    }
+
+
+    /* TEST SEARCH */
+    /* For presence and absence */
     for(int i = 0; i < 20; i++){
         int p = search(i, &listAscend);
         if(p > 0){
@@ -43,23 +56,33 @@ int main(int argc, char const *argv[])
         }
     }
 
-    /* list containing value several times. */
-    list cList = createList();
-    for(int i = 0; i < 10; i++){
-        insertEnd(3, &cList);
-    }
-
-    int p = search(3, &cList);
+    /* for list with same elements */
+    int p = search(4, &cList);
+    // printf("Value 3 found in position %i\n", p);
+    p = search(2, &cList);
     // printf("Value 3 found in position %i\n", p);
 
-    //removing all values 1 by 1
+
+    /* TEST REMOVING */
+
+    /* First position */
     while(removeElement(0, &listAscend) > -1){
         // print(&listAscend);
     }
 
+    /* Last position */
     while(removeElement(listDescend.size-1, &listDescend) > -1){
         // print(&listDescend);
     }
+
+    /* TEST TOARRAY */
+    int* testArray = toArray(&testList);
+    printf("The value is %i\n", testArray[1]);
+    printf("[");
+    for(int i = 0; i < 3; i++){;
+        printf("%i ", testArray[i]);
+    }
+    printf("]\n");
 
     return 0;
 }

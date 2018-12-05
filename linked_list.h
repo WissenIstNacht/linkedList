@@ -127,6 +127,5 @@ int removeElement(int pos, pList xs);
  */
 int print(pList xs);
 
-int sort(pList xs);
-
+int* toArray(pList xs);
 #endif

@@ -165,10 +165,6 @@ int removeElement(int pos, pList xs){
     return 0;
 }
 
-int sort(pList xs){
-    return 0;
-}
-
 int print(pList xs){
     if(xs->size == 0){
         printf("[]\n");
@@ -185,3 +181,36 @@ int print(pList xs){
         printf("]\n");
     }
 }
+
+int* toArray(pList xs){
+    int n = xs->size;
+
+    if(n ==0){
+        printf("List is empty!");
+        return NULL;
+    }
+
+    int* ptr;
+    ptr = malloc(sizeof(int)*n);
+
+    if(ptr == NULL){
+        printf("Not enough memory!");
+        return NULL;
+    }
+    
+    
+    pElem currItem = xs->firstElem;
+    *ptr = currItem->key;
+    unsigned int k = 1;
+    
+    while(currItem->nextElem != NULL){
+    printf("hi\n");
+        currItem = currItem->nextElem;
+        *(ptr + k) = currItem->key;
+        k++;
+    }
+    
+    return ptr;
+}
+
+
