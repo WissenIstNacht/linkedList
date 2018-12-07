@@ -75,6 +75,10 @@ int main(int argc, char const *argv[])
         // print(&listDescend);
     }
 
+    removeAll(&cList);
+    printf("hi\n");
+    print(&cList);
+
     /* TEST TOARRAY */
     int* testArray = toArray(&testList);
     printf("The value is %i\n", testArray[1]);

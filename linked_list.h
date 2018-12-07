@@ -28,8 +28,8 @@ struct elem{
 };
 
 typedef struct{
-    pElem firstElem;
-    pElem lastElem;
+    pElem head;
+    pElem tail;
     int size;
 } list, *pList;
 
@@ -114,6 +114,18 @@ int search(int key, pList xs);
  */
 int removeElement(int pos, pList xs);
 
+/** Removes all items form the list.
+ * 
+ * @param   pList: pointer to list in which the key should be deleted. 
+ *          
+ * @return   0, if elements deleted successfully. 
+ *          -1, else.
+ * 
+ * This method goes through all elements one by one deleting them. It frees the memory of the
+ * allocated nodes and sets the head and tail pointer NULL.
+ */
+int removeAll(pList xs);
+
 /** Prints the list
  * 
  * @param   pList: pointer to list in which the key should be deleted. 
@@ -127,5 +139,16 @@ int removeElement(int pos, pList xs);
  */
 int print(pList xs);
 
+/** Outputs the list as an array
+ * 
+ * @param   pList: pointer to list in which the key should be deleted. 
+ *          
+ * @return  *ptr:   Address to first array entry
+ * 
+ * This method puts every key in the list into an array. It does so by starting
+ * at head and ending at tail.
+ *
+ *  [e_1, e_2, ..., e_n]
+ */
 int* toArray(pList xs);
 #endif

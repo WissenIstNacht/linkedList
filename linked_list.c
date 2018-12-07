@@ -5,8 +5,8 @@
 list createList(){
     list xs;
 
-    xs.firstElem = NULL;
-    xs.lastElem = NULL;
+    xs.head = NULL;
+    xs.tail = NULL;
     xs.size = 0;
 
     return xs;
@@ -26,8 +26,8 @@ static int initializeList(int key, pList xs){
     firstItem->nextElem = NULL;
 
     //update listpointers
-    xs->firstElem = firstItem;
-    xs->lastElem = firstItem;
+    xs->head = firstItem;
+    xs->tail = firstItem;
     xs->size++;
 
     return 0;
@@ -52,9 +52,9 @@ int insertEnd(int value, pList xs){
     newLast->nextElem = NULL;
 
     //update pointers
-    pElem currLast = xs->lastElem;
+    pElem currLast = xs->tail;
     currLast->nextElem = newLast;
-    xs->lastElem = newLast;
+    xs->tail = newLast;
     xs->size++;
     
     return 0;
@@ -69,7 +69,7 @@ int insertFront(int value, pList xs){
     //Create new elemnt
     elem new;
     new.key = value;
-    new.nextElem = xs->firstElem;
+    new.nextElem = xs->head;
 
     pElem newFirst = malloc(sizeof(elem));
 
@@ -80,15 +80,15 @@ int insertFront(int value, pList xs){
     
     //update lists first element
     newFirst->key = value;
-    newFirst->nextElem = xs->firstElem;
-    xs->firstElem = newFirst;
+    newFirst->nextElem = xs->head;
+    xs->head = newFirst;
     xs->size++;
 
     return 0;
 }
 
 int search(int value, pList xs){
-    pElem currElem = xs->firstElem;
+    pElem currElem = xs->head;
     int k = 0;
     //go through list
     while(currElem->nextElem != NULL){
@@ -116,32 +116,32 @@ int removeElement(int pos, pList xs){
     // Different procedure depending on list size.
     if(n==1){
         //for one item first=last. List empty afterwards.
-        pElem firstItem = xs->firstElem;
-        xs->firstElem = NULL;
-        xs->lastElem = NULL;
+        pElem firstItem = xs->head;
+        xs->head = NULL;
+        xs->tail = NULL;
         free(firstItem);
     }
     //for two elements only simply redirect lists first/last pointer
     else if(n==2){
         if(pos == 0){
-            pElem firstItem = xs->firstElem;
-            xs->firstElem = xs->lastElem;
+            pElem firstItem = xs->head;
+            xs->head = xs->tail;
             free(firstItem);
         }else{
-            pElem lastItem = xs->lastElem;
-            xs->lastElem = xs->firstElem;
-            xs->firstElem->nextElem = NULL;
+            pElem lastItem = xs->tail;
+            xs->tail = xs->head;
+            xs->head->nextElem = NULL;
             free(lastItem);
         }
     }
     //if list larger need to traverse to element...
     else{
-        pElem lItem = xs->firstElem;    //needed for traversing
+        pElem lItem = xs->head;    //needed for traversing
         pElem mItem = lItem->nextElem;
         int k = 1;
         //...except for first elemnt
         if(pos == 0){
-            xs->firstElem = mItem;
+            xs->head = mItem;
             free(lItem);
         }else{
             //travese        
@@ -152,7 +152,7 @@ int removeElement(int pos, pList xs){
             }
             //elements in middle of the list deleted differently than at end.
             if(pos == n-1){
-                xs->lastElem = lItem;
+                xs->tail = lItem;
                 lItem->nextElem = NULL;
                 free(mItem);
             }else{
@@ -165,13 +165,37 @@ int removeElement(int pos, pList xs){
     return 0;
 }
 
+
+int removeAll(pList xs){
+    int n = xs->size;
+    
+    if(n == 0){
+        return 0;
+    }
+
+    pElem currItem = xs->head;
+    pElem nextItem = currItem->nextElem;
+
+    while(nextItem != NULL){
+        free(currItem);
+        currItem = nextItem;
+        nextItem = currItem->nextElem;
+    }
+
+    free(currItem);
+    xs->size = 0;
+    xs->head = NULL;
+    xs->tail = NULL;
+
+    return 0;
+}
+
 int print(pList xs){
     if(xs->size == 0){
         printf("[]\n");
-    }
-
-    if(xs->firstElem != NULL){
-        pElem currElem = xs->firstElem;
+        return 0;
+    }else{
+        pElem currElem = xs->head;
 
         printf("[%i", currElem->key);
         while(currElem->nextElem != NULL){
@@ -199,12 +223,11 @@ int* toArray(pList xs){
     }
     
     
-    pElem currItem = xs->firstElem;
+    pElem currItem = xs->head;
     *ptr = currItem->key;
     unsigned int k = 1;
     
     while(currItem->nextElem != NULL){
-    printf("hi\n");
         currItem = currItem->nextElem;
         *(ptr + k) = currItem->key;
         k++;
