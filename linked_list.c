@@ -12,7 +12,7 @@ list createList(){
     return xs;
 }
 
-static int initializeList(int key, pList xs){
+int initializeList(int key, pList xs){
     //allocatae new node
     pElem firstItem = malloc(sizeof(elem));
     

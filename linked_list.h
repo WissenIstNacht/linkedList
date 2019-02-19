@@ -59,7 +59,7 @@ list createList();
  * implementation is simple: Attach a new dynAlloc node to the both of the list
  * pointers (first and lastElement).
  */
-static int initializeList(int key, pList xs);
+int initializeList(int key, pList xs);
 
 /** Insert item at the end of a list.
  * 

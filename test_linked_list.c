@@ -58,7 +58,7 @@ int main(int argc, char const *argv[])
 
     /* for list with same elements */
     int p = search(4, &cList);
-    // printf("Value 3 found in position %i\n", p);
+    printf("Value 3 found in position %i\n", p);
     p = search(2, &cList);
     // printf("Value 3 found in position %i\n", p);
 
