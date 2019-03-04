@@ -1,22 +1,32 @@
-/*
+/******************************************************************************
     Author: WissenIstNacht
     Date: November 2018 
 
     This module implements a linked list data structure. It provides basic
     functionality such as creation, insertion, deletion as well as other
-    function that can be handy when working with lists. So far, only integer key
-    are supported.
+    function that can be handy when working with lists. So far, only integer
+    keys are supported.
 
-    A note on working with lists: The module is meant to be use as follows:
-    1)  Always start by create a list using the method createList. This method
-        returns a list (struct) with size 0 and ptrs set to NULL.
-        'list someList = createList();
-    2)  Then add/remove elements using insertFront/End and remove Element
+    How does one work with lists? The module is meant to be used as follows:
+    
+    1)  Always start by creating a list using the method createList. This
+        method returns a list (struct) with size 0 and ptrs set to NULL:
+
+        list someList = createList();
+
+    2)  Then add or remove elements using the respective function:
         methods.
-        'insertX(42, &someList)'
-    3)  Since list elements are dynamically allocated delete list after using it.
-        'deleteList(&someList)'
-*/
+
+        prepend(42, &someList)
+        prepend(42*42, &someList)
+        remove()
+
+    3)  Since list elements are dynamically allocated delete list after using
+        it.
+    
+        deleteList(&someList)
+
+******************************************************************************/
 
 #ifndef _LL_H_
 #define _LL_H_
@@ -34,32 +44,13 @@ typedef struct{
 } list, *pList;
 
 
-/** Creates empty list.
+/** Create empty list with both ptr fields of the NULL and size 0.
  * 
  * @param  pList: pointer to list that is created. 
  *          
- * @return 
- * 
- * Sets both ptr fields of the list to NULL and the size to 0.
+ * @return  list: Struct representing empty list.
  */
 list createList();
-
-/** Insert first item into empty list.
- * 
- * @param   key: key to be inserted.
- *          pList: pointer to list into which key should be inserted. 
- *          
- *          
- * @return  1 if the insertion was successful,
- *          -1 if not (e.g. no more mem, etc,)
- * 
- * Using InsertFront/InsertEnd on a newly declared list leads to a segmentation
- * fault *as one would need dereference a NULL ptr(). This is why this function
- * is called whenever an insertion is made into a list with size 0. It's
- * implementation is simple: Attach a new dynAlloc node to the both of the list
- * pointers (first and lastElement).
- */
-int initializeList(int key, pList xs);
 
 /** Insert item at the end of a list.
  * 
@@ -73,7 +64,7 @@ int initializeList(int key, pList xs);
  * Thanks to the pointer to the last element provided by the list itself, this
  * method can access the end of the list directly and add the item in time O(1).
  */
-int insertEnd(int key, pList xs);
+int append(int key, pList xs);
 
 /** Insert item at the begining of a list.
  * 
@@ -84,7 +75,7 @@ int insertEnd(int key, pList xs);
  * @return  1 if the insertion was successful,
  *          -1 if not (e.g. no more mem, etc,)
  */
-int insertFront(int key, pList xs);
+int prepend(int key, pList xs);
 
 /** Searches for an item in a list.
  * 
@@ -137,7 +128,7 @@ int removeAll(pList xs);
  *
  *  [e_1, e_2, ..., e_n]
  */
-int print(pList xs);
+void print(pList xs);
 
 /** Outputs the list as an array
  * 
@@ -151,4 +142,5 @@ int print(pList xs);
  *  [e_1, e_2, ..., e_n]
  */
 int* toArray(pList xs);
+
 #endif

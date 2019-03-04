@@ -12,7 +12,20 @@ list createList(){
     return xs;
 }
 
-int initializeList(int key, pList xs){
+
+/** Inserts FIRST element into EMPTY list.
+ * 
+ * @param   key: key to be inserted.
+ *          pList: pointer to EMPTY list into which key should be inserted. 
+ *          
+ * @return  1 if the insertion was successful,
+ *          -1 if not (e.g. no more mem, etc,).
+ * 
+ * Putting the first element into a list requires special treatment of null
+ * pointers in the empty list. This function does just that. Note that it is a
+ * private function that is only called by prepend or append.  
+ */
+static int initializeList(int key, pList xs){
     //allocatae new node
     pElem firstItem = malloc(sizeof(elem));
     
@@ -33,7 +46,7 @@ int initializeList(int key, pList xs){
     return 0;
 }
 
-int insertEnd(int value, pList xs){
+int append(int value, pList xs){
     //inserting into an empty list is done via initializeList.
     if(xs->size == 0){
         return initializeList(value, xs);
@@ -60,16 +73,11 @@ int insertEnd(int value, pList xs){
     return 0;
 }
 
-int insertFront(int value, pList xs){
+int prepend(int value, pList xs){
     //inserting into an empty list is done via initializeList.
     if(xs->size == 0){
         return initializeList(value, xs);
     }
-
-    //Create new elemnt
-    elem new;
-    new.key = value;
-    new.nextElem = xs->head;
 
     pElem newFirst = malloc(sizeof(elem));
 
@@ -190,10 +198,9 @@ int removeAll(pList xs){
     return 0;
 }
 
-int print(pList xs){
+void print(pList xs){
     if(xs->size == 0){
         printf("[]\n");
-        return 0;
     }else{
         pElem currElem = xs->head;
 

@@ -15,11 +15,13 @@
 
 int main(int argc, char const *argv[])
 {
+    printf("*********** Start linked list test program ***********\n");
+
    /* TEST INSERTIONS */
     list testList  = createList();
-    insertFront(3, &testList);
-    insertEnd(4, &testList);
-    insertFront(2, &testList);
+    prepend(3, &testList);
+    append(4, &testList);
+    prepend(2, &testList);
     // print(&testList);
     
     /* longer lists */
@@ -27,8 +29,8 @@ int main(int argc, char const *argv[])
     list listDescend = createList();
     
     for(int i = 0; i < 10; i++){
-        insertEnd(i, &listAscend);
-        insertFront(i, &listDescend);
+        append(i, &listAscend);
+        prepend(i, &listDescend);
     }
     // print(&listAscend);
     // print(&listDescend);
@@ -38,9 +40,9 @@ int main(int argc, char const *argv[])
     for(int i = 0; i < 10; i++){
         
         if(i < 5){
-            insertEnd(4, &cList);
+            append(4, &cList);
         }else{
-            insertEnd(2, &cList);
+            append(2, &cList);
         }
     }
 
@@ -88,5 +90,7 @@ int main(int argc, char const *argv[])
     }
     printf("]\n");
 
+
+    printf("Ended linked list test program successfully!\n");
     return 0;
 }
