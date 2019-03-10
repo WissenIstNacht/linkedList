@@ -12,7 +12,6 @@ list createList(){
     return xs;
 }
 
-
 /** Inserts FIRST element into EMPTY list.
  * 
  * @param   key: key to be inserted.
@@ -173,12 +172,11 @@ int removeElement(int pos, pList xs){
     return 0;
 }
 
-
-int removeAll(pList xs){
+void removeAll(pList xs){
     int n = xs->size;
     
     if(n == 0){
-        return 0;
+        return;
     }
 
     pElem currItem = xs->head;
@@ -194,8 +192,6 @@ int removeAll(pList xs){
     xs->size = 0;
     xs->head = NULL;
     xs->tail = NULL;
-
-    return 0;
 }
 
 void print(pList xs){
@@ -243,4 +239,14 @@ int* toArray(pList xs){
     return ptr;
 }
 
+void mergeLists(pList xs, pList ys){
+    xs->tail = ys->head;
+    xs->size += ys->size;
+    free(ys);
+}
+
+void removeList(pList xs){
+    removeAll(xs);
+    free(xs);
+}
 

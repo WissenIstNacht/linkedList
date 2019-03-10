@@ -90,7 +90,7 @@ int main(int argc, char const *argv[])
     }
     printf("]\n");
 
-
+    mergeLists(&cList, &listAscend);
     printf("Ended linked list test program successfully!\n");
     return 0;
 }

@@ -115,7 +115,7 @@ int removeElement(int pos, pList xs);
  * This method goes through all elements one by one deleting them. It frees the memory of the
  * allocated nodes and sets the head and tail pointer NULL.
  */
-int removeAll(pList xs);
+void removeAll(pList xs);
 
 /** Prints the list
  * 
@@ -142,5 +142,28 @@ void print(pList xs);
  *  [e_1, e_2, ..., e_n]
  */
 int* toArray(pList xs);
+
+/** Merges two lists into one\n
+ * 
+ * @param   pList: pointer to list in which the key should be deleted. 
+ *          
+ * @return  nothing to return
+ * 
+ * Merging the lists means that the first element of ys gets appended to the
+ * (last element of) list xs. In particular this means that ys no longer exists
+ * and xs gets modified.
+ */
+void mergeLists(pList xs, pList ys);
+
+/** Removes the list and all its items.
+ * 
+ * @param   pList: pointer to list to be deleted
+ *          
+ * @return   0, if list deleted successfully. 
+ *          -1, else.
+ * 
+ * This method first deletes all elements, then
+ */
+void removeList(pList xs);
 
 #endif
